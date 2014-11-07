@@ -11,13 +11,13 @@
     </head>
     <body ng-app="tweeter" ng-controller="tweetController">
         <h1>Latest Tweets from adaptive-test-api</h1>
+        <button ng-click="getNewTweets()">Load More</button>
         <div id="error" ng-model="errorHandler">{{error-no-new-tweets}}</div>
-        <ul ng-repeat="tweet in tweetData">
+        <ul ng-repeat="tweet in tweetData track by $index">
             <li>{{tweet.user_handle}}</li>
             <li>{{tweet.message}}</li>
             <li>{{tweet.updated_at}}</li>
             <li>{{tweet.sentiment}}</li>
         </ul>
-        <button ng-click="getTweets()">Load More</button>
     </body>
 </html>

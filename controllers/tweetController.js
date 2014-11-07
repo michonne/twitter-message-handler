@@ -7,15 +7,36 @@ angular.module("tweeter.tweetController", [])
 	{
 		$scope.tweetData = [];
 
-		$scope.getTweets = function()
+		$scope.getNewTweets = function()
 		{
 			getTweetsService.getTweets().success(function(tweets)
 			{
-				$scope.tweetData = tweets;
+				var isTweetUnique = false;
+				var i;
+
+				for (i = 0; i < tweets.length; i++)
+				{
+					isTweetUnique = $scope.validateTweetData(tweets[i]);
+
+					if(isTweetUnique)
+					{
+						$scope.tweetData.push(tweets[i]);
+					}
+				}
 			});
 
 			getTweetsService.getTweets().error(function(response) {
 				console.error("No Tweet Data!", response);
 			});
+
+			return $scope.tweetData;
 		};
+
+		$scope.validateTweetData = function(data)
+		{
+			console.log($scope.tweetData);
+			return true;
+		};
+
+		$scope.getNewTweets();
 	});
