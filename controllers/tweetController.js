@@ -34,8 +34,17 @@ angular.module("tweeter.tweetController", [])
 
 		$scope.validateTweetData = function(data)
 		{
-			console.log($scope.tweetData);
-			return true;
+			var isUnique = true;
+			var i;
+
+			for (i = 0; i < $scope.tweetData.length; i++)
+			{
+				if($scope.tweetData[i].id === data.id){
+					isUnique = false;
+				}
+			}
+
+			return isUnique;
 		};
 
 		$scope.getNewTweets();
