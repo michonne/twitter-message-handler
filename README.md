@@ -1,4 +1,4 @@
 twitter-message-handler
 =======================
 
-Displays and updates view with unique twitter messages
+Using Angularjs to display and update our view with unique twitter messages
