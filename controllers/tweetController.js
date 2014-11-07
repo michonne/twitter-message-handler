@@ -2,18 +2,20 @@
  * Main controller to load in our tweets
  */
 
-angular.module("tweeter", [])
-	.controller("tweetController", function($scope, $http)
+angular.module("tweeter.tweetController", [])
+	.controller("tweetController", function($scope, getTweetsService)
 	{
-		$scope.tweetDataPromise = $http.get("http://adaptive-test-api.herokuapp.com/tweets.json");
+		$scope.tweetData = [];
 
-		console.log($scope.tweetData);
+		$scope.getTweets = function()
+		{
+			getTweetsService.getTweets().success(function(tweets)
+			{
+				$scope.tweetData = tweets;
+			});
 
-		$scope.tweetDataPromise.success(function(data, status, headers, config) {
-			//$scope.myData.fromServer = data.title;
-			$scope.tweetData = data;
-		});
-		$scope.tweetDataPromise.error(function(data, status, headers, config) {
-			console.error("No Tweet Data!");
-		});
+			getTweetsService.getTweets().error(function(response) {
+				console.error("No Tweet Data!", response);
+			});
+		};
 	});
